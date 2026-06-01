@@ -1,0 +1,97 @@
+/* globals.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=DM+Mono:wght@400;500&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Fonts (shared across themes) */
+  --font-display: 'Playfair Display', 'Georgia', serif;
+  --font-body: 'Cormorant Garamond', 'Garamond', serif;
+  --font-mono: 'DM Mono', 'Fira Code', monospace;
+  --color-accent: #ff9838;
+  
+  /* Dark mode (default) */
+  --color-bg: #050404;
+  --color-text: #f5f0eb;
+  --color-accent-dim: rgba(255, 152, 56, 0.6);
+  --color-glass-bg: rgba(255, 255, 255, 0.07);
+  --color-glass-border: rgba(255, 255, 255, 0.14);
+  --color-glass-bg-hover: rgba(255, 255, 255, 0.12);
+  --color-glass-border-hover: rgba(255, 255, 255, 0.25);
+  --color-scrollbar-track: #0a0807;
+  --color-scrollbar-thumb: rgba(255, 152, 56, 0.3);
+  --color-scrollbar-thumb-hover: rgba(255, 152, 56, 0.55);
+  --color-backdrop: rgba(4, 3, 2, 0.85);
+  --color-modal-bg: rgba(8, 6, 5, 0.96);
+  --color-card-bg: rgba(255, 255, 255, 0.04);
+  --color-card-border: rgba(255, 255, 255, 0.08);
+  --gradient-section: linear-gradient(to bottom, #050404 0%, #0d0b09 50%, #050404 100%);
+}
+
+/* Light mode */
+[data-theme='light'] {
+  --color-bg: #fafaf8;
+  --color-text: #1a1a18;
+  --color-accent-dim: rgba(255, 152, 56, 0.8);
+  --color-glass-bg: rgba(255, 255, 255, 0.6);
+  --color-glass-border: rgba(0, 0, 0, 0.08);
+  --color-glass-bg-hover: rgba(255, 255, 255, 0.75);
+  --color-glass-border-hover: rgba(0, 0, 0, 0.12);
+  --color-scrollbar-track: #f0ede8;
+  --color-scrollbar-thumb: rgba(255, 152, 56, 0.4);
+  --color-scrollbar-thumb-hover: rgba(255, 152, 56, 0.6);
+  --color-backdrop: rgba(255, 255, 255, 0.85);
+  --color-modal-bg: rgba(255, 255, 255, 0.96);
+  --color-card-bg: rgba(255, 152, 56, 0.04);
+  --color-card-border: rgba(255, 152, 56, 0.15);
+  --gradient-section: linear-gradient(to bottom, #fafaf8 0%, #f5f0eb 50%, #fafaf8 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar-thumb);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbar-thumb-hover);
+}
+
+/* Selection */
+::selection {
+  background: rgba(255, 152, 56, 0.28);
+  color: #fff;
+}
+
+/* Remove button defaults */
+button {
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: inherit;
+  cursor: pointer;
+}

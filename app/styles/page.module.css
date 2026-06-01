@@ -1,0 +1,40 @@
+/* page.module.css */
+
+.main {
+  min-height: 100vh;
+  background: #050404;
+  color: #f5f0eb;
+}
+
+.nextSection {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 6rem 2rem;
+  font-family: 'Playfair Display', 'Georgia', serif;
+  color: rgba(245, 240, 235, 0.85);
+  background: linear-gradient(
+    to bottom,
+    #050404 0%,
+    #0d0b09 60%,
+    #111108 100%
+  );
+}
+
+.nextSection h2 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.nextSection p {
+  font-family: 'Cormorant Garamond', 'Garamond', serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: rgba(255, 200, 140, 0.6);
+  margin: 0;
+}

@@ -1,0 +1,191 @@
+/* AchievementsSection.module.css */
+
+.achievementsSection {
+  min-height: 100vh;
+  padding: 8rem 2rem;
+  background: var(--gradient-section);
+  position: relative;
+}
+
+/* Heading Container */
+.headingContainer {
+  margin-bottom: 5rem;
+  text-align: center;
+  position: relative;
+}
+
+.sectionHeading {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin: 0 0 1.5rem 0;
+  line-height: 1.1;
+}
+
+.headingUnderline {
+  width: clamp(60px, 12vw, 120px);
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--color-accent) 30%, var(--color-accent) 70%, transparent 100%);
+  margin: 0 auto;
+}
+
+/* Achievements Container */
+.achievementsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Achievement Card */
+.achievementCard {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.75rem;
+  padding: 2rem;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-left: 3px solid transparent;
+  backdrop-filter: blur(20px);
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--delay, 0ms);
+  transition: all 0.35s ease;
+  overflow: hidden;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.achievementCard.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover State */
+.achievementCard:hover {
+  border-color: var(--color-card-border-hover, var(--color-accent));
+  border-left-color: var(--color-accent);
+  background: var(--color-glass-bg-hover);
+  box-shadow: 0 8px 32px var(--color-accent-dim), inset 0 0 20px var(--color-accent-dim);
+}
+
+/* Icon Wrapper */
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 64px;
+  width: 64px;
+  height: 64px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: 8px;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  transition: all 0.35s ease;
+}
+
+.achievementCard:hover .iconWrapper {
+  background: var(--color-accent-dim);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 20px var(--color-accent-dim);
+}
+
+.iconWrapper svg {
+  width: 28px;
+  height: 28px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Content */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Achievement Title */
+.achievementTitle {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* Date */
+.date {
+  font-family: 'DM Mono', 'Fira Code', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-accent-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Detail */
+.detail {
+  font-family: 'Cormorant Garamond', 'Garamond', serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--color-text);
+  opacity: 0.7;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Prize */
+.prize {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ff9838;
+  margin-top: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .achievementsContainer {
+    gap: 1.5rem;
+  }
+
+  .achievementCard {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .iconWrapper {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+  }
+
+  .iconWrapper svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .achievementTitle {
+    font-size: 1.15rem;
+  }
+}
