@@ -160,6 +160,21 @@ export default function VideoIntro({
     setVideoLoaded(true);
   }, []);
 
+  const handleVideoEnded = useCallback(() => {
+    if (!videoRef.current || !posterRef.current) return;
+    
+    // Fade out video, fade in poster
+    const tl = gsap.timeline();
+    tl.to(videoRef.current, { opacity: 0, duration: 0.6, ease: 'power2.inOut' }, 0);
+    tl.to(posterRef.current, { opacity: 1, duration: 0.6, ease: 'power2.inOut' }, 0);
+    tl.eventCallback('onComplete', () => {
+      setShowPoster(true);
+      setIsPlaying(false);
+    });
+    
+    if (bgVideoRef.current) bgVideoRef.current.pause();
+  }, []);
+
   return (
     <section ref={heroRef} className={styles.hero} style={{ opacity: 0 }}>
       {/* ── Ambient blurred bg video ───────────────────────────────────────── */}
@@ -173,7 +188,6 @@ export default function VideoIntro({
           muted
           playsInline
           aria-hidden="true"
-          suppressHydrationWarning
         />
         <div className={styles.bgVideoNoise} />
       </div>
@@ -194,12 +208,11 @@ export default function VideoIntro({
           className={styles.fgVideo}
           src={videoSrc}
           autoPlay
-          loop
           muted={isMuted}
           playsInline
           onCanPlay={handleVideoReady}
           onLoadedData={handleVideoReady}
-          suppressHydrationWarning
+          onEnded={handleVideoEnded}
         />
         <img
           ref={posterRef}

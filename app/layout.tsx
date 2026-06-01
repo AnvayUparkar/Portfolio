@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { ThemeProvider } from './context/ThemeContext';
-import './styles/globals.css';
-
+import './styles/globals.css'
 
 export const metadata: Metadata = {
   title: 'Anvay Uparkar — Developer Portfolio',
