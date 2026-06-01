@@ -29,7 +29,7 @@ export default function VideoIntro({
   const soundBadgeRef = useRef<HTMLDivElement>(null);
   const soundTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(true);
   const [showSoundHint, setShowSoundHint] = useState(true);
   const [videoLoaded, setVideoLoaded] = useState(false);
