@@ -31,7 +31,7 @@ export default function VideoIntro({
   const soundBadgeRef = useRef<HTMLDivElement>(null);
   const soundTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showSoundHint, setShowSoundHint] = useState(true);
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -159,9 +159,19 @@ export default function VideoIntro({
         setShowPoster(true);
       });
     } else {
-      // Play: fade out poster, fade in video
+      // Play: fade out poster, fade in video, and unmute
       videoRef.current.play();
       if (bgVideoRef.current) bgVideoRef.current.play();
+
+      // Unmute automatically when playing
+      setIsMuted(false);
+      videoRef.current.muted = false;
+      
+      // Hide sound hint since audio will play
+      if (showSoundHint) {
+        if (soundTimerRef.current) clearTimeout(soundTimerRef.current);
+        setShowSoundHint(false);
+      }
 
       const tl = gsap.timeline();
       tl.to(posterRef.current, { opacity: 0, duration: 0.3, ease: 'power2.inOut' }, 0);
