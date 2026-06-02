@@ -11,6 +11,7 @@ interface VideoIntroProps {
   lastName?: string;
   tagline?: string;
   role?: string;
+  resumeLink?: string;
   onScrollDown?: () => void;
 }
 
@@ -20,6 +21,7 @@ export default function VideoIntro({
   lastName = 'Sharma',
   tagline = 'Full-Stack Engineer & ML Architect',
   role = 'Building immersive digital experiences at the intersection of healthcare, AI, and modern web.',
+  resumeLink = '#',
   onScrollDown,
 }: VideoIntroProps) {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -30,63 +32,87 @@ export default function VideoIntro({
   const soundTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [showSoundHint, setShowSoundHint] = useState(true);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [showPoster, setShowPoster] = useState(false);
+  const [isBuffering, setIsBuffering] = useState(true);
   const posterRef = useRef<HTMLImageElement>(null);
 
   // ─── Entrance animation ───────────────────────────────────────────────────
   useEffect(() => {
-    if (!videoLoaded) return;
+    if (!videoLoaded || !heroRef.current) return;
+    
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
       tl.fromTo(
         heroRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 1.6 }
+        { opacity: 1, duration: 0.8 }
       )
         .fromTo(
           `.${styles.tagline}`,
           { opacity: 0, y: 18, letterSpacing: '0.35em' },
-          { opacity: 1, y: 0, letterSpacing: '0.22em', duration: 1.1 },
-          '-=0.6'
+          { opacity: 1, y: 0, letterSpacing: '0.22em', duration: 0.6 },
+          '-=0.3'
         )
         .fromTo(
           `.${styles.firstName}`,
           { opacity: 0, y: 60, skewY: 2 },
-          { opacity: 1, y: 0, skewY: 0, duration: 1.3 },
-          '-=0.7'
+          { opacity: 1, y: 0, skewY: 0, duration: 0.7 },
+          '-=0.4'
         )
         .fromTo(
           `.${styles.lastName}`,
           { opacity: 0, y: 70, skewY: 2 },
-          { opacity: 1, y: 0, skewY: 0, duration: 1.3 },
-          '-=1.1'
+          { opacity: 1, y: 0, skewY: 0, duration: 0.7 },
+          '-=0.5'
         )
         .fromTo(
           `.${styles.roleText}`,
           { opacity: 0, y: 24 },
-          { opacity: 1, y: 0, duration: 1.0 },
-          '-=0.7'
+          { opacity: 1, y: 0, duration: 0.6 },
+          '-=0.4'
         )
         .fromTo(
           `.${styles.controlsRow}`,
           { opacity: 0, y: 16 },
-          { opacity: 1, y: 0, duration: 0.9 },
-          '-=0.6'
+          { opacity: 1, y: 0, duration: 0.5 },
+          '-=0.3'
+        )
+        .fromTo(
+          `.${styles.resumeButton}`,
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.5 },
+          '-=0.3'
         )
         .fromTo(
           `.${styles.scrollIndicator}`,
           { opacity: 0 },
-          { opacity: 1, duration: 1.0 },
-          '-=0.4'
+          { opacity: 1, duration: 0.6 },
+          '-=0.2'
         );
     }, heroRef);
 
-    return () => ctx.revert();
+    return () => {
+      try {
+        ctx.revert();
+      } catch (e) {
+        // Silently handle cleanup errors
+      }
+    };
   }, [videoLoaded]);
+
+  // ─── Fallback: Show hero section if video takes too long to load ─────────
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (heroRef.current && heroRef.current.style.opacity === '0') {
+        gsap.to(heroRef.current, { opacity: 1, duration: 0.5 });
+      }
+    }, 1500); // 1.5 second fallback
+    return () => clearTimeout(timeout);
+  }, []);
 
   // ─── Auto-hide sound hint ─────────────────────────────────────────────────
   useEffect(() => {
@@ -95,12 +121,12 @@ export default function VideoIntro({
         gsap.to(soundBadgeRef.current, {
           opacity: 0,
           y: -8,
-          duration: 0.7,
+          duration: 0.5,
           ease: 'power2.in',
           onComplete: () => setShowSoundHint(false),
         });
       }
-    }, 4500);
+    }, 2500);
     return () => {
       if (soundTimerRef.current) clearTimeout(soundTimerRef.current);
     };
@@ -127,8 +153,8 @@ export default function VideoIntro({
       if (bgVideoRef.current) bgVideoRef.current.pause();
 
       const tl = gsap.timeline();
-      tl.to(videoRef.current, { opacity: 0, duration: 0.6, ease: 'power2.inOut' }, 0);
-      tl.to(posterRef.current, { opacity: 1, duration: 0.6, ease: 'power2.inOut' }, 0);
+      tl.to(videoRef.current, { opacity: 0, duration: 0.3, ease: 'power2.inOut' }, 0);
+      tl.to(posterRef.current, { opacity: 1, duration: 0.3, ease: 'power2.inOut' }, 0);
       tl.eventCallback('onComplete', () => {
         setShowPoster(true);
       });
@@ -138,8 +164,8 @@ export default function VideoIntro({
       if (bgVideoRef.current) bgVideoRef.current.play();
 
       const tl = gsap.timeline();
-      tl.to(posterRef.current, { opacity: 0, duration: 0.5, ease: 'power2.inOut' }, 0);
-      tl.to(videoRef.current, { opacity: 1, duration: 0.5, ease: 'power2.inOut' }, 0);
+      tl.to(posterRef.current, { opacity: 0, duration: 0.3, ease: 'power2.inOut' }, 0);
+      tl.to(videoRef.current, { opacity: 1, duration: 0.3, ease: 'power2.inOut' }, 0);
       tl.eventCallback('onComplete', () => {
         setShowPoster(false);
       });
@@ -158,6 +184,15 @@ export default function VideoIntro({
 
   const handleVideoReady = useCallback(() => {
     setVideoLoaded(true);
+    setIsBuffering(false);
+  }, []);
+
+  const handleBuffering = useCallback(() => {
+    setIsBuffering(true);
+  }, []);
+
+  const handleBuffered = useCallback(() => {
+    setIsBuffering(false);
   }, []);
 
   const handleVideoEnded = useCallback(() => {
@@ -165,8 +200,8 @@ export default function VideoIntro({
     
     // Fade out video, fade in poster
     const tl = gsap.timeline();
-    tl.to(videoRef.current, { opacity: 0, duration: 0.6, ease: 'power2.inOut' }, 0);
-    tl.to(posterRef.current, { opacity: 1, duration: 0.6, ease: 'power2.inOut' }, 0);
+    tl.to(videoRef.current, { opacity: 0, duration: 0.3, ease: 'power2.inOut' }, 0);
+    tl.to(posterRef.current, { opacity: 1, duration: 0.3, ease: 'power2.inOut' }, 0);
     tl.eventCallback('onComplete', () => {
       setShowPoster(true);
       setIsPlaying(false);
@@ -182,13 +217,14 @@ export default function VideoIntro({
         <video
           ref={bgVideoRef}
           className={styles.bgVideo}
-          src={videoSrc}
-          autoPlay
+          preload="metadata"
           loop
           muted
           playsInline
           aria-hidden="true"
-        />
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
         <div className={styles.bgVideoNoise} />
       </div>
 
@@ -206,21 +242,27 @@ export default function VideoIntro({
         <video
           ref={videoRef}
           className={styles.fgVideo}
-          src={videoSrc}
-          autoPlay
+          preload="metadata"
           muted={isMuted}
           playsInline
           onCanPlay={handleVideoReady}
           onLoadedData={handleVideoReady}
           onEnded={handleVideoEnded}
-        />
+          onWaiting={handleBuffering}
+          onPlaying={handleBuffered}
+        >
+          <source src={videoSrc} type="video/mp4" />
+        </video>
         <img
           ref={posterRef}
           src="/poster.png"
           alt="Portfolio preview"
           className={styles.fgPoster}
-          style={{ opacity: 0 }}
+          style={{ opacity: 1 }}
         />
+        {isBuffering && videoLoaded && (
+          <div className={styles.loadingSpinner} aria-hidden="true" />
+        )}
         <div className={styles.videoVignette} />
         <div className={styles.scanlines} aria-hidden="true" />
       </div>
@@ -233,6 +275,21 @@ export default function VideoIntro({
           <span className={styles.lastName}>{lastName}</span>
         </h1>
         <p className={styles.roleText}>{role}</p>
+
+        {/* Resume Button */}
+        <a
+          href={resumeLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.resumeButton}
+          aria-label="View Resume"
+        >
+          <svg className={styles.resumeIcon} viewBox="0 0 16 16" fill="none">
+            <path d="M3 1h10a1 1 0 011 1v12a1 1 0 01-1 1H3a1 1 0 01-1-1V2a1 1 0 011-1z" stroke="currentColor" strokeWidth="1.2" fill="none"/>
+            <path d="M5 4h6M5 7h6M5 10h4" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
+          </svg>
+          View Resume
+        </a>
 
         {/* Controls */}
         <div className={styles.controlsRow}>
