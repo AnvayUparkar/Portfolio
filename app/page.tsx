@@ -2,6 +2,7 @@
 
 import VideoIntro from './components/VideoIntro';
 import ProjectsSection from './components/ProjectsSection';
+import TechStackSection from './components/TechStackSection';
 import AchievementsSection from './components/AchievementsSection';
 import ThemeToggle from './components/ThemeToggle';
 import styles from './styles/page.module.css';
@@ -25,6 +26,9 @@ export default function Home() {
 
         {/* ── Achievements Section ──────────────────────────────────────────── */}
         <AchievementsSection />
+
+        {/* ── Technology Ecosystem Section ──────────────────────────────────── */}
+        <TechStackSection />
       </main>
     </>
   );

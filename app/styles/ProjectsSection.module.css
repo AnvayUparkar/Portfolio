@@ -85,7 +85,7 @@
 .projectCard:hover {
   border-color: var(--color-card-border-hover, var(--color-accent));
   background: var(--color-glass-bg-hover);
-  box-shadow: 0 8px 32px var(--color-accent-dim), inset 0 0 20px var(--color-accent-dim);
+  box-shadow: 0 8px 32px var(--color-card-shadow-hover), inset 0 0 20px var(--color-card-shadow-hover);
   transform: translateY(-6px);
 }
 

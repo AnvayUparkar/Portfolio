@@ -81,7 +81,7 @@
   border-color: var(--color-card-border-hover, var(--color-accent));
   border-left-color: var(--color-accent);
   background: var(--color-glass-bg-hover);
-  box-shadow: 0 8px 32px var(--color-accent-dim), inset 0 0 20px var(--color-accent-dim);
+  box-shadow: 0 8px 32px var(--color-card-shadow-hover), inset 0 0 20px var(--color-card-shadow-hover);
 }
 
 /* Icon Wrapper */
@@ -103,7 +103,7 @@
 .achievementCard:hover .iconWrapper {
   background: var(--color-accent-dim);
   border-color: var(--color-accent);
-  box-shadow: 0 0 20px var(--color-accent-dim);
+  box-shadow: 0 0 20px var(--color-card-shadow-hover);
 }
 
 .iconWrapper svg {
@@ -157,7 +157,7 @@
   font-family: 'Playfair Display', 'Georgia', serif;
   font-size: 1.1rem;
   font-weight: 700;
-  color: #ff9838;
+  color: var(--color-accent);
   margin-top: 0.5rem;
   letter-spacing: -0.01em;
 }

@@ -1,0 +1,774 @@
+/* TechStackSection.module.css */
+
+.section {
+  position: relative;
+  min-height: 100vh;
+  background: var(--gradient-section);
+  color: var(--color-text);
+  overflow: hidden;
+  padding: 4rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   BACKGROUND EFFECTS
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.backgroundLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gradientRadial {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1200px;
+  height: 1200px;
+  background: radial-gradient(
+    circle,
+    rgba(var(--color-glow-base), 0.1) 0%,
+    rgba(var(--color-glow-secondary), 0.05) 30%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  animation: gradientPulse 6s ease-in-out infinite;
+}
+
+.glowCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(var(--color-glow-base), 0.08) 0%,
+    rgba(var(--color-glow-secondary), 0.04) 40%,
+    transparent 100%
+  );
+  filter: blur(80px);
+}
+
+.gridFade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(
+      rgba(var(--color-glow-base), 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(var(--color-glow-base), 0.03) 1px,
+      transparent 1px
+    );
+  background-size: 50px 50px;
+  background-position: 0 0, 0 0;
+  opacity: 0.5;
+}
+
+.particleField {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(circle, rgba(var(--color-glow-base), 0.2) 1px, transparent 1px),
+    radial-gradient(circle, rgba(var(--color-glow-secondary), 0.15) 1px, transparent 1px),
+    radial-gradient(circle, rgba(var(--color-glow-base), 0.1) 1px, transparent 1px);
+  background-size:
+    200px 200px,
+    150px 150px,
+    250px 250px;
+  background-position:
+    0 0,
+    50px 50px,
+    100px 0;
+  opacity: 0.3;
+}
+
+@keyframes gradientPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   CONTENT WRAPPER
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   HEADER
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+.badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  background: rgba(var(--color-glow-base), 0.08);
+  border: 1px solid rgba(var(--color-glow-base), 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.badge:hover {
+  background: rgba(var(--color-glow-base), 0.15);
+  border-color: rgba(var(--color-glow-base), 0.4);
+  box-shadow: 0 0 20px rgba(var(--color-glow-base), 0.2);
+}
+
+.badgeOuter {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50px;
+  background: linear-gradient(
+    135deg,
+    rgba(var(--color-glow-base), 0.3),
+    rgba(var(--color-glow-secondary), 0.2),
+    transparent
+  );
+  opacity: 0;
+}
+
+.badgeText {
+  position: relative;
+  z-index: 1;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-title-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  background: linear-gradient(
+    135deg,
+    var(--color-title-start) 0%,
+    var(--color-title-end) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--color-text);
+  opacity: 0.65;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 600px;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ORBITAL SYSTEM (DESKTOP)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.orbitalContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  cursor: grab;
+}
+
+.orbitalContainer:active {
+  cursor: grabbing;
+}
+
+.orbitalCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.orbitalsWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   TECH ORB
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.techOrb {
+  position: absolute;
+  left: calc(50% - 35px);
+  top: calc(50% - 35px);
+  width: 70px;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgba(var(--color-glow-base), 0.08);
+  border: 1px solid rgba(var(--color-glow-base), 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transform-origin: center;
+}
+
+.techOrb:hover {
+  background: rgba(var(--color-glow-base), 0.15);
+  border-color: rgba(var(--color-glow-base), 0.4);
+}
+
+.techOrb.orbHovered {
+  background: rgba(var(--color-glow-base), 0.2);
+  border-color: var(--tech-color);
+  box-shadow: 0 0 30px var(--tech-color);
+}
+
+.orbIcon {
+  font-size: 2rem;
+  color: var(--tech-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+.techOrb.orbHovered .orbIcon {
+  transform: scale(1.3);
+  filter: drop-shadow(0 0 20px currentColor);
+}
+
+.orbLabel {
+  position: absolute;
+  top: 85px;
+  left: 50%;
+  transform: translate(-50%, 10px);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--color-text);
+  opacity: 0;
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.techOrb.orbHovered .orbLabel {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   AI CORE
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.aiCore {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glowRing {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(var(--color-glow-base), 0.4) 0%,
+    rgba(var(--color-glow-base), 0.1) 70%,
+    transparent 100%
+  );
+  z-index: 0;
+}
+
+.coreInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    circle,
+    rgba(var(--color-glow-base), 0.3) 0%,
+    rgba(var(--color-glow-base), 0.15) 50%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  border: 2px solid rgba(var(--color-glow-base), 0.3);
+  z-index: 1;
+}
+
+.corePulse {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--color-accent);
+  z-index: 2;
+  filter: drop-shadow(0 0 20px var(--color-accent-dim));
+}
+
+.rotatingRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--color-glow-base), 0.2);
+  box-sizing: border-box;
+}
+
+.rotatingRing:first-of-type {
+  animation: rotateRing 20s linear infinite;
+}
+
+.rotatingRing:last-of-type {
+  animation: rotateRingReverse 25s linear infinite;
+  border-style: dashed;
+}
+
+@keyframes rotateRing {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateRingReverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.coreText {
+  position: absolute;
+  bottom: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.coreRole {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--color-text);
+  opacity: 0.6;
+  margin: 0;
+  font-style: italic;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   TOOLTIP
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.tooltip {
+  position: fixed;
+  padding: 1rem 1.25rem;
+  background: var(--color-modal-bg);
+  border: 1px solid rgba(var(--color-glow-base), 0.3);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 0 30px rgba(var(--color-glow-base), 0.2);
+  pointer-events: none;
+  z-index: 999999;
+  max-width: 250px;
+}
+
+.tooltipHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.tooltipName {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.tooltipCategory {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  background: var(--color-accent-dim);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+
+.tooltipDescription {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-text);
+  opacity: 0.7;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   CATEGORY PILLS
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.categoryPills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.categoryPill {
+  padding: 0.75rem 1.5rem;
+  background: rgba(var(--color-glow-base), 0.08);
+  border: 1px solid rgba(var(--color-glow-base), 0.2);
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text);
+  opacity: 0.8;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.categoryPill:hover {
+  background: rgba(var(--color-glow-base), 0.15);
+  border-color: rgba(var(--color-glow-base), 0.4);
+  color: var(--color-text);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   METRICS
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.metricsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  margin-top: 3rem;
+  padding: 2rem;
+  background: rgba(var(--color-glow-base), 0.05);
+  border: 1px solid rgba(var(--color-glow-base), 0.1);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.metricItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.metricValue {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-title-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+.metricLabel {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  opacity: 0.65;
+  text-align: center;
+  margin: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   MOBILE GRID
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.mobileGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.mobileCard {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(var(--color-glow-base), 0.08);
+  border: 1px solid rgba(var(--color-glow-base), 0.2);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.mobileCard:hover {
+  background: rgba(var(--color-glow-base), 0.15);
+  border-color: rgba(var(--color-glow-base), 0.4);
+  transform: translateY(-4px);
+}
+
+.mobileCardIcon {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+.mobileCard:hover .mobileCardIcon {
+  filter: drop-shadow(0 0 16px currentColor);
+  transform: scale(1.1);
+}
+
+.mobileCardName {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+  opacity: 0.85;
+  text-align: center;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.mobileCardCategory {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN
+   ════════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .orbitalContainer {
+    max-width: 600px;
+  }
+
+  .techOrb {
+    width: 60px;
+    height: 60px;
+  }
+
+  .orbIcon {
+    font-size: 1.75rem;
+  }
+
+  .metricsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    min-height: 120vh;
+    padding: 3rem 1rem;
+  }
+
+  .header {
+    margin-bottom: 1rem;
+  }
+
+  .title {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+
+  .metricsContainer {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .metricValue {
+    font-size: 2rem;
+  }
+
+  .mobileGrid {
+    gap: 1rem;
+  }
+
+  .mobileCard {
+    aspect-ratio: 1;
+    padding: 0.75rem;
+  }
+
+  .mobileCardIcon {
+    font-size: 1.75rem;
+  }
+
+  .mobileCardName {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .header {
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .badgeText {
+    font-size: 0.75rem;
+  }
+
+  .title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  .description {
+    font-size: 0.95rem;
+  }
+
+  .categoryPills {
+    gap: 0.75rem;
+  }
+
+  .categoryPill {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  .metricsContainer {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .metricValue {
+    font-size: 2.5rem;
+  }
+
+  .mobileGrid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .mobileCard {
+    padding: 0.5rem;
+    gap: 0.5rem;
+    border-radius: 12px;
+  }
+
+  .mobileCardIcon {
+    font-size: 1.5rem;
+  }
+
+  .mobileCardName {
+    font-size: 0.75rem;
+  }
+
+  .mobileCardCategory {
+    font-size: 0.65rem;
+  }
+
+  .tooltip {
+    max-width: 200px;
+    padding: 0.75rem 1rem;
+  }
+
+  .tooltipName {
+    font-size: 0.9rem;
+  }
+
+  .tooltipDescription {
+    font-size: 0.8rem;
+  }
+}

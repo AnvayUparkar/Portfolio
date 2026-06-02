@@ -27,7 +27,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: blur(48px) saturate(1.3) brightness(0.35);
+  filter: blur(48px) saturate(1.3) brightness(var(--hero-video-brightness));
+  opacity: var(--hero-bg-video-opacity);
   transform: scale(1.12);
 }
 
@@ -50,9 +51,9 @@
   height: 75%;
   background: linear-gradient(
     to top,
-    rgba(4, 3, 2, 0.97) 0%,
-    rgba(4, 3, 2, 0.78) 30%,
-    rgba(4, 3, 2, 0.3) 62%,
+    rgba(var(--color-hero-overlay-rgb), var(--hero-grad-bottom-alpha-1)) 0%,
+    rgba(var(--color-hero-overlay-rgb), var(--hero-grad-bottom-alpha-2)) 30%,
+    rgba(var(--color-hero-overlay-rgb), var(--hero-grad-bottom-alpha-3)) 62%,
     transparent 100%
   );
   z-index: 3;
@@ -67,8 +68,8 @@
   height: 40%;
   background: linear-gradient(
     to bottom,
-    rgba(4, 3, 2, 0.7) 0%,
-    rgba(4, 3, 2, 0.2) 50%,
+    rgba(var(--color-hero-overlay-rgb), var(--hero-grad-top-alpha-1)) 0%,
+    rgba(var(--color-hero-overlay-rgb), var(--hero-grad-top-alpha-2)) 50%,
     transparent 100%
   );
   z-index: 3;
@@ -80,8 +81,8 @@
   inset: 0;
   background: linear-gradient(
     to right,
-    rgba(4, 3, 2, 0.72) 0%,
-    rgba(4, 3, 2, 0.3) 30%,
+    rgba(var(--color-hero-overlay-rgb), var(--hero-grad-left-alpha-1)) 0%,
+    rgba(var(--color-hero-overlay-rgb), var(--hero-grad-left-alpha-2)) 30%,
     transparent 58%
   );
   z-index: 3;
@@ -94,7 +95,7 @@
   background: radial-gradient(
     ellipse at 60% 40%,
     transparent 32%,
-    rgba(2, 2, 4, 0.68) 100%
+    rgba(var(--color-hero-vignette-rgb), var(--hero-vignette-alpha)) 100%
   );
   z-index: 3;
   pointer-events: none;
@@ -141,8 +142,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to right, rgba(4,3,2,0.9) 0%, transparent 30%),
-    linear-gradient(to bottom, rgba(4,3,2,0.4) 0%, transparent 15%, transparent 75%, rgba(4,3,2,0.95) 100%);
+    linear-gradient(to right, rgba(var(--color-hero-overlay-rgb), var(--hero-video-vignette-alpha-1)) 0%, transparent 30%),
+    linear-gradient(to bottom, rgba(var(--color-hero-overlay-rgb), var(--hero-video-vignette-alpha-2)) 0%, transparent 15%, transparent 75%, rgba(var(--color-hero-overlay-rgb), var(--hero-video-vignette-alpha-3)) 100%);
   pointer-events: none;
 }
 
@@ -228,10 +229,9 @@
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255, 165, 80, 0.85);
+  color: var(--color-hero-tagline);
   margin: 0 0 1.8rem 0;
   padding: 0;
-
 }
 
 /* ── Name block ──────────────────────────────────────────────────────────── */
@@ -279,7 +279,7 @@
   font-weight: 400;
   font-style: italic;
   line-height: 1.6;
-  color: rgba(230, 215, 195, 0.7);
+  color: var(--color-hero-text-dim);
   max-width: 480px;
   margin: 0 0 2rem 0;
 }
@@ -300,11 +300,11 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--color-hero-border);
+  background: var(--color-hero-btn-bg);
   backdrop-filter: blur(16px) saturate(1.4);
   -webkit-backdrop-filter: blur(16px) saturate(1.4);
-  color: rgba(255, 245, 235, 0.9);
+  color: var(--color-text);
   cursor: pointer;
   transition:
     background 0.25s ease,
@@ -312,16 +312,16 @@
     transform 0.18s ease,
     box-shadow 0.25s ease;
   outline: none;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .glassBtn:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 165, 80, 0.45);
+  background: var(--color-hero-btn-bg-hover);
+  border-color: var(--color-accent);
   transform: scale(1.08);
   box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.35),
-    0 0 20px rgba(255, 140, 40, 0.18);
+    0 4px 20px rgba(0, 0, 0, 0.2),
+    0 0 20px var(--color-accent-dim);
 }
 
 .glassBtn:active {
@@ -335,15 +335,15 @@
   gap: 8px;
   padding: 7px 14px 7px 10px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--color-hero-btn-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 165, 80, 0.25);
+  border: 1px solid var(--color-hero-border);
   font-family: 'DM Mono', monospace;
   font-size: 0.68rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 200, 130, 0.85);
+  color: var(--color-hero-text-dim);
   white-space: nowrap;
 }
 
@@ -351,8 +351,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: rgba(255, 145, 60, 0.9);
-  box-shadow: 0 0 0 0 rgba(255, 145, 60, 0.5);
+  background: var(--color-hero-pulse);
+  box-shadow: 0 0 0 0 var(--color-hero-pulse);
   animation: soundPulseAnim 1.4s ease-out infinite;
   flex-shrink: 0;
 }
@@ -391,7 +391,7 @@
   font-size: 0.6rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: rgba(255, 200, 140, 0.5);
+  color: var(--color-hero-scroll-label);
   opacity: 0.7;
   transition: opacity 0.2s ease;
 }
@@ -400,7 +400,7 @@
   position: relative;
   width: 1px;
   height: 48px;
-  background: rgba(255, 200, 140, 0.18);
+  background: var(--color-hero-scroll-line);
   overflow: hidden;
   border-radius: 1px;
 }
@@ -414,7 +414,7 @@
   background: linear-gradient(
     to bottom,
     transparent,
-    rgba(255, 165, 80, 0.8),
+    var(--color-accent),
     transparent
   );
   animation: scrollPulseAnim 2s ease-in-out infinite;
@@ -434,15 +434,11 @@
   padding: 10px 24px;
   height: 44px;
   border-radius: 8px;
-  border: 1.5px solid rgba(255, 165, 80, 0.45);
-  background: linear-gradient(
-    135deg,
-    rgba(255, 165, 80, 0.12) 0%,
-    rgba(255, 140, 40, 0.08) 100%
-  );
+  border: 1.5px solid var(--color-hero-border);
+  background: var(--color-hero-btn-bg);
   backdrop-filter: blur(12px) saturate(1.2);
   -webkit-backdrop-filter: blur(12px) saturate(1.2);
-  color: rgba(255, 200, 130, 0.95);
+  color: var(--color-text);
   font-family: 'DM Mono', 'Fira Code', monospace;
   font-size: clamp(0.72rem, 0.95vw, 0.82rem);
   font-weight: 600;
@@ -457,24 +453,20 @@
     box-shadow 0.3s ease,
     color 0.3s ease;
   outline: none;
-  box-shadow: 0 4px 16px rgba(255, 140, 40, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   text-decoration: none;
   white-space: nowrap;
   margin-top: 0.8rem;
 }
 
 .resumeButton:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 165, 80, 0.22) 0%,
-    rgba(255, 140, 40, 0.16) 100%
-  );
-  border-color: rgba(255, 165, 80, 0.7);
-  color: rgba(255, 225, 170, 1);
+  background: var(--color-hero-btn-bg-hover);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
   transform: translateY(-2px);
   box-shadow:
-    0 6px 24px rgba(255, 140, 40, 0.18),
-    0 0 20px rgba(255, 165, 80, 0.15);
+    0 6px 24px var(--color-accent-dim),
+    0 0 20px var(--color-accent-dim);
 }
 
 .resumeButton:active {

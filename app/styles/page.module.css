@@ -2,8 +2,9 @@
 
 .main {
   min-height: 100vh;
-  background: #050404;
-  color: #f5f0eb;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .nextSection {
@@ -15,13 +16,9 @@
   gap: 1.5rem;
   padding: 6rem 2rem;
   font-family: 'Playfair Display', 'Georgia', serif;
-  color: rgba(245, 240, 235, 0.85);
-  background: linear-gradient(
-    to bottom,
-    #050404 0%,
-    #0d0b09 60%,
-    #111108 100%
-  );
+  color: var(--color-text);
+  background: var(--gradient-section);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .nextSection h2 {
@@ -35,6 +32,7 @@
   font-family: 'Cormorant Garamond', 'Garamond', serif;
   font-size: 1.2rem;
   font-style: italic;
-  color: rgba(255, 200, 140, 0.6);
+  color: var(--color-accent);
+  opacity: 0.85;
   margin: 0;
 }

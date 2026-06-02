@@ -78,7 +78,8 @@ export default function CinematicLayer() {
       p: Particle,
       mx: number,
       my: number,
-      t: number
+      t: number,
+      isLight: boolean
     ) => {
       const parallax = p.z * 28;
       const px =
@@ -94,12 +95,15 @@ export default function CinematicLayer() {
         ? `28, ${Math.floor(70 + p.hue * 30)}%, ${Math.floor(58 + p.hue * 14)}%`
         : `${Math.floor(190 + p.hue * 20)}, 25%, 88%`;
 
+      const opacityMult = isLight ? 0.35 : 1.0;
+      const opacityVal = p.opacity * opacityMult;
+
       const grad = ctx.createRadialGradient(px, py, 0, px, py, r);
-      grad.addColorStop(0, `hsla(${h}, ${p.opacity * 0.9})`);
-      grad.addColorStop(0.4, `hsla(${h}, ${p.opacity * 0.5})`);
+      grad.addColorStop(0, `hsla(${h}, ${opacityVal * 0.9})`);
+      grad.addColorStop(0.4, `hsla(${h}, ${opacityVal * 0.5})`);
       grad.addColorStop(1, `hsla(${h}, 0)`);
 
-      ctx.globalCompositeOperation = 'screen';
+      ctx.globalCompositeOperation = isLight ? 'source-over' : 'screen';
       ctx.fillStyle = grad;
       ctx.beginPath();
       ctx.arc(px, py, r, 0, Math.PI * 2);
@@ -107,13 +111,20 @@ export default function CinematicLayer() {
     };
 
     // ─── Subtle horizontal light streak ─────────────────────────────────────
-    const drawLightLeak = (t: number) => {
+    const drawLightLeak = (t: number, isLight: boolean) => {
       const y = H * (0.38 + Math.sin(t * 0.00004) * 0.06);
       const grad = ctx.createLinearGradient(0, y - 60, 0, y + 60);
-      grad.addColorStop(0, 'rgba(255,160,60,0)');
-      grad.addColorStop(0.5, 'rgba(255,160,60,0.018)');
-      grad.addColorStop(1, 'rgba(255,160,60,0)');
-      ctx.globalCompositeOperation = 'screen';
+      if (isLight) {
+        grad.addColorStop(0, 'rgba(211, 115, 21, 0)');
+        grad.addColorStop(0.5, 'rgba(211, 115, 21, 0.012)');
+        grad.addColorStop(1, 'rgba(211, 115, 21, 0)');
+        ctx.globalCompositeOperation = 'source-over';
+      } else {
+        grad.addColorStop(0, 'rgba(255,160,60,0)');
+        grad.addColorStop(0.5, 'rgba(255,160,60,0.018)');
+        grad.addColorStop(1, 'rgba(255,160,60,0)');
+        ctx.globalCompositeOperation = 'screen';
+      }
       ctx.fillStyle = grad;
       ctx.fillRect(0, y - 60, W, 120);
     };
@@ -125,9 +136,10 @@ export default function CinematicLayer() {
 
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
 
-      drawLightLeak(ts);
-      for (const p of particles) drawBokeh(p, mx, my, ts);
+      drawLightLeak(ts, isLight);
+      for (const p of particles) drawBokeh(p, mx, my, ts, isLight);
 
       ctx.globalCompositeOperation = 'source-over';
       frameRef.current = requestAnimationFrame(render);
