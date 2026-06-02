@@ -81,17 +81,18 @@
   --color-scrollbar-track: #f2eae0;
   --color-scrollbar-thumb: rgba(211, 115, 21, 0.3);
   --color-scrollbar-thumb-hover: rgba(211, 115, 21, 0.5);
-  --color-backdrop: rgba(249, 246, 240, 0.85);
-  --color-modal-bg: rgba(253, 251, 247, 0.96);
+  --color-backdrop: rgba(251, 251, 249, 0.85);
+  --color-modal-bg: rgba(255, 255, 255, 0.98);
+  --color-bg: #fbfbf9; /* Lighter soft warm off-white */
   --color-card-bg: rgba(211, 115, 21, 0.03);
   --color-card-border: rgba(211, 115, 21, 0.12);
-  --gradient-section: linear-gradient(to bottom, #faf6f0 0%, #f2eae0 50%, #faf6f0 100%);
+  --gradient-section: linear-gradient(to bottom, #fbfbf9 0%, #f5f3ee 50%, #fbfbf9 100%);
   --color-title-start: #2c2520;
   --color-title-end: #6b5e56;
 
   /* Hero & Global visual specific variables (Light Mode) */
-  --color-hero-overlay-rgb: 249, 246, 240;
-  --color-hero-vignette-rgb: 242, 234, 224;
+  --color-hero-overlay-rgb: 251, 251, 249;
+  --color-hero-vignette-rgb: 246, 244, 240;
   --hero-video-brightness: 0.85;
   --hero-bg-video-opacity: 0.18;
   --color-hero-text-dim: rgba(44, 37, 32, 0.75);

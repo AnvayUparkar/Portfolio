@@ -189,3 +189,32 @@
     font-size: 1.15rem;
   }
 }
+
+.viewLink {
+  align-self: flex-start;
+  margin-top: 0.75rem;
+  font-family: 'DM Mono', 'Fira Code', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--color-accent);
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: transparent;
+}
+
+.viewLink:hover {
+  background: var(--color-accent);
+  color: #fff !important;
+  box-shadow: 0 0 15px var(--color-card-shadow-hover);
+  transform: translateY(-1px);
+}
+
+[data-theme='light'] .viewLink:hover {
+  background: var(--color-accent);
+  color: #fff !important;
+}

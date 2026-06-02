@@ -4,6 +4,7 @@ import VideoIntro from './components/VideoIntro';
 import ProjectsSection from './components/ProjectsSection';
 import TechStackSection from './components/TechStackSection';
 import AchievementsSection from './components/AchievementsSection';
+import CertificationsSection from './components/CertificationsSection';
 import ThemeToggle from './components/ThemeToggle';
 import styles from './styles/page.module.css';
 
@@ -26,6 +27,9 @@ export default function Home() {
 
         {/* ── Achievements Section ──────────────────────────────────────────── */}
         <AchievementsSection />
+
+        {/* ── Certifications Section ────────────────────────────────────────── */}
+        <CertificationsSection />
 
         {/* ── Technology Ecosystem Section ──────────────────────────────────── */}
         <TechStackSection />

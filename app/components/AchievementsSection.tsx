@@ -10,6 +10,7 @@ interface Achievement {
   detail: string;
   prize?: string;
   icon: 'trophy' | 'medal' | 'code';
+  link?: string;
 }
 
 const achievementsData: Achievement[] = [
@@ -20,6 +21,7 @@ const achievementsData: Achievement[] = [
     detail: 'JARVIS recognized among SAKEC\'s best projects. Presented at GITAM University IASF Bangalore.',
     prize: '₹5,000',
     icon: 'trophy',
+    link: 'https://drive.google.com/file/d/1Spv4eA_qqb-nybhjFGU7eKQLy-L43V7k/view?usp=drive_link',
   },
   {
     id: 2,
@@ -28,13 +30,24 @@ const achievementsData: Achievement[] = [
     detail: 'Awarded for designing and implementing a time series analysis machine learning model using IBM Watson Studio.',
     prize: '₹2,000',
     icon: 'medal',
+    link: 'https://drive.google.com/file/d/1bsdQM6qrnwg_3p_paXuqteby2rnVP9hT/view?usp=drive_link',
   },
   {
     id: 3,
+    title: 'Inter College Poster making Competetion',
+    date: '2024',
+    detail: 'Awarded Runner-Up Certificate for Poster making competetion held at Shah and Anchor Kutchhi Engineering College.',
+    prize: '₹500',
+    icon: 'code',
+    link: 'https://drive.google.com/file/d/1L7KzVc2_tCUb90VoiNdZejcQuMJ5VtrM/view?usp=drive_link',
+  },
+  {
+    id: 4,
     title: 'National Odoo Hackathon — Top 350 of 19,000',
     date: '2024',
     detail: 'Selected among top 350 participants nationally out of 19,000. Advanced to 24-hour final round in Gandhinagar, Gujarat.',
     icon: 'code',
+    link: 'https://drive.google.com/file/d/1ptLBG4tcx2UcyHWz0YWSvCVJ8KT0ettN/view?usp=drive_link'
   },
 ];
 
@@ -119,6 +132,17 @@ export default function AchievementsSection() {
               <p className={styles.detail}>{achievement.detail}</p>
 
               {achievement.prize && <div className={styles.prize}>Award: {achievement.prize}</div>}
+
+              {achievement.link && (
+                <a
+                  href={achievement.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.viewLink}
+                >
+                  View Certificate →
+                </a>
+              )}
             </div>
           </div>
         ))}
