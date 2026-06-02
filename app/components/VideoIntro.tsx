@@ -21,7 +21,7 @@ export default function VideoIntro({
   lastName = 'Sharma',
   tagline = 'Full-Stack Engineer & ML Architect',
   role = 'Building immersive digital experiences at the intersection of healthcare, AI, and modern web.',
-  resumeLink = '#',
+  resumeLink = 'https://drive.google.com/file/d/14SzM9zCkyxO-3Xwl37JlwsS0qLho6vim/view?usp=drive_link',
   onScrollDown,
 }: VideoIntroProps) {
   const heroRef = useRef<HTMLDivElement>(null);
